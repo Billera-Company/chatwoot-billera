@@ -18,6 +18,9 @@ on:
 env:
   DOCKER_REPO: etan1997/billera-chatwoot
 
+permissions:
+  contents: read
+
 jobs:
   build:
     strategy:
