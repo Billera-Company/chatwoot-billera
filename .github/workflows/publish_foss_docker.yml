@@ -54,20 +54,23 @@ jobs:
 
       - name: Custom Billera Branding
         run: |
-          # 1. Ganti Teks/Title HANYA di file locales (Aman dari error kode rusak)
+          # 1. Ganti kata Chatwoot di file bahasa Backend (Ruby)
           sed -i 's/Chatwoot/Billera/g' config/locales/en.yml
           
-          # 2. Ganti title tag di HTML secara spesifik (tidak merusak variabel vueapp)
+          # 2. Ganti kata Chatwoot di file bahasa Frontend (Vue.js) - INI YANG KRUSIAL
+          # Ini akan mengubah teks di halaman Login, Setup, dan Elemen UI lainnya
+          find app/javascript/ -type f -name "en.json" -exec sed -i 's/"Chatwoot"/"Billera"/g' {} +
+          find app/javascript/ -type f -name "en.json" -exec sed -i 's/ Chatwoot/ Billera/g' {} +
+          
+          # 3. Ganti title tag di HTML secara spesifik
           find app/views/ -type f -name "*.html.erb" -exec sed -i 's/<title>Chatwoot<\/title>/<title>Billera<\/title>/g' {} +
-          # 2. Timpa Logo di folder brand-assets
-          # Pastikan kamu sudah menaruh file logo Billera di root repo dengan nama 'logo-billera.png'
+          
+          # 4. Timpa file Logo ke folder brand-assets
           if [ -f "logo.png" ] && [ -f "logo_thumbnail.png" ] && [ -f "logo_dark.png" ]; then
+            mkdir -p public/brand-assets
             cp logo.png public/brand-assets/logo.png
             cp logo_thumbnail.png public/brand-assets/logo_thumbnail.png
             cp logo_dark.png public/brand-assets/logo_dark.png
-            # Jika ada file favicon atau logo khusus mode gelap, timpa di sini juga:
-            # cp logo-billera.png public/brand-assets/favicon.ico
-
             cp logo_thumbnail.png public/brand-assets/favicon.ico
           else
             echo "Waduh, file logo ada yang kurang di root repository!"
