@@ -54,10 +54,11 @@ jobs:
 
       - name: Custom Billera Branding
         run: |
-          # 1. Ganti Teks/Title dari Chatwoot menjadi Billera
-          find app/views/ -type f -name "*.html.erb" -exec sed -i 's/Chatwoot/Billera/g' {} +
+          # 1. Ganti Teks/Title HANYA di file locales (Aman dari error kode rusak)
           sed -i 's/Chatwoot/Billera/g' config/locales/en.yml
           
+          # 2. Ganti title tag di HTML secara spesifik (tidak merusak variabel vueapp)
+          find app/views/ -type f -name "*.html.erb" -exec sed -i 's/<title>Chatwoot<\/title>/<title>Billera<\/title>/g' {} +
           # 2. Timpa Logo di folder brand-assets
           # Pastikan kamu sudah menaruh file logo Billera di root repo dengan nama 'logo-billera.png'
           if [ -f "logo.png" ] && [ -f "logo_thumbnail.png" ] && [ -f "logo_dark.png" ]; then
