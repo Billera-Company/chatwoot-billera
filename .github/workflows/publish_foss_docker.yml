@@ -52,6 +52,27 @@ jobs:
         run: |
           echo -en '\nENV CW_EDITION="ce"' >> docker/Dockerfile
 
+      - name: Custom Billera Branding
+        run: |
+          # 1. Ganti Teks/Title dari Chatwoot menjadi Billera
+          find app/views/ -type f -name "*.html.erb" -exec sed -i 's/Chatwoot/Billera/g' {} +
+          sed -i 's/Chatwoot/Billera/g' config/locales/en.yml
+          
+          # 2. Timpa Logo di folder brand-assets
+          # Pastikan kamu sudah menaruh file logo Billera di root repo dengan nama 'logo-billera.png'
+          if [ -f "logo.png" ] && [ -f "logo_thumbnail.png" ] && [ -f "logo_dark.png" ]; then
+            cp logo.png public/brand-assets/logo.png
+            cp logo_thumbnail.png public/brand-assets/logo_thumbnail.png
+            cp logo_dark.png public/brand-assets/logo_dark.png
+            # Jika ada file favicon atau logo khusus mode gelap, timpa di sini juga:
+            # cp logo-billera.png public/brand-assets/favicon.ico
+
+            cp logo_thumbnail.png public/brand-assets/favicon.ico
+          else
+            echo "Waduh, file logo ada yang kurang di root repository!"
+            exit 1
+          fi
+          
       - name: Set Docker Tags
         run: |
           SANITIZED_REF=$(echo "$GIT_REF" | sed 's/\//-/g')
