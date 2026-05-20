@@ -1,0 +1,35 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="darkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="150" cy="150" r="140" fill="url(#darkGradient)" />
+  
+  <!-- Chat bubbles group with neon effect -->
+  <g>
+    <!-- Left bubble (email/message) -->
+    <path d="M 60 100 L 110 100 Q 120 100 120 110 L 120 140 Q 120 150 110 150 L 70 150 L 60 165 L 65 150 L 60 150 Q 50 150 50 140 L 50 110 Q 50 100 60 100" 
+          fill="none" stroke="#00d9ff" stroke-width="2.5" stroke-linejoin="round"/>
+    <line x1="60" y1="115" x2="105" y2="115" stroke="#00d9ff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <line x1="60" y1="130" x2="105" y2="130" stroke="#00d9ff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    
+    <!-- Right bubble (chat) with gradient -->
+    <path d="M 140 170 L 220 170 Q 235 170 235 185 L 235 220 Q 235 235 220 235 L 160 235 L 145 250 L 155 235 L 140 235 Q 125 235 125 220 L 125 185 Q 125 170 140 170" 
+          fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linejoin="round"/>
+    <line x1="145" y1="190" x2="220" y2="190" stroke="#00ff88" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <line x1="145" y1="210" x2="220" y2="210" stroke="#00ff88" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    
+    <!-- Typing dots -->
+    <circle cx="150" cy="215" r="2" fill="#00ff88" opacity="0.9"/>
+    <circle cx="160" cy="215" r="2" fill="#00ff88" opacity="0.7"/>
+    <circle cx="170" cy="215" r="2" fill="#00ff88" opacity="0.5"/>
+  </g>
+  
+  <!-- Accent glow elements -->
+  <circle cx="75" cy="85" r="4" fill="#00d9ff" opacity="0.5"/>
+  <circle cx="240" cy="245" r="3" fill="#00ff88" opacity="0.4"/>
+</svg>
